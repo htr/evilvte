@@ -21,6 +21,7 @@
 // #define COLOR_STYLE   /* Options: LINUX, RXVT, TANGO, XTERM, ZENBURN,      */
                          /*          ZENBURN_DARK, SOLARIZED_DARK,            */
                          /*          SOLARIZED_LIGHT                          */
+#define COLOR_STYLE LINUX
 // #define COLOR_TEXT_BOLD        "red"
 // #define COLOR_TEXT_DIM         "#FFFF00"
 // #define COLOR_TEXT_HIGHLIGHTED "green"
@@ -31,7 +32,7 @@
 // #define COMMAND_DOCK_MODE      TRUE  /* -d option, run as a dock           */
 #define    COMMAND_EXEC_PROGRAM   TRUE  /* -e option, execute program         */
 // #define COMMAND_FULLSCREEN     TRUE  /* -f option, init in fullscreen mode */
-// #define COMMAND_FONT           TRUE  /* -fn option, to assign font & size  */
+#define COMMAND_FONT              TRUE  /* -fn option, to assign font & size  */
 // #define COMMAND_GEOMETRY       TRUE  /* -g +X+Y option, to assign geometry */
 // #define COMMAND_LOGIN_SHELL    TRUE  /* -ls option, to enable login shell  */
 // #define COMMAND_SET_TITLE      TRUE  /* -T or -title to set program title  */
@@ -46,8 +47,8 @@
 // #define DEFAULT_DIRECTORY      g_get_current_dir()
 // #define DEFAULT_TERMINAL_SIZE  80x24
 // #define EXPORT_WINDOWID        TRUE
-// #define FONT                   "Monospace 10"
-// #define FONT_ANTI_ALIAS        TRUE
+#define FONT                   "Envy Code R 11"
+#define FONT_ANTI_ALIAS        TRUE
 // #define FONT_ENABLE_BOLD_TEXT  TRUE
 // #define MOUSE_CTRL_SATURATION  TRUE  /* Scroll left or right to adjust it  */
 // #define MOUSE_CURSOR_AUTOHIDE  TRUE
@@ -57,23 +58,23 @@
 // #define RECORD_LASTLOG         TRUE
 // #define RECORD_UTMP            TRUE
 // #define RECORD_WTMP            TRUE
-// #define SCROLL_LINES           1000  /* Negative value means unlimited     */
-// #define SCROLL_ON_KEYSTROKE    TRUE
-// #define SCROLL_ON_OUTPUT       TRUE
-#define    SCROLLBAR              RIGHT /* Options: LEFT, RIGHT, OFF_L, OFF_R */
+#define SCROLL_LINES           10000  /* Negative value means unlimited     */
+#define SCROLL_ON_KEYSTROKE    TRUE
+#define SCROLL_ON_OUTPUT       FALSE
+#define    SCROLLBAR              OFF_R /* Options: LEFT, RIGHT, OFF_L, OFF_R */
 // #define SHOW_WINDOW_BORDER     TRUE
 // #define SHOW_WINDOW_DECORATED  TRUE
-#define    SHOW_WINDOW_ICON       TRUE
-#define    STATUS_BAR             TRUE
+#define    SHOW_WINDOW_ICON       FALSE
+#define    STATUS_BAR             FALSE
 // #define WINDOW_TITLE_DYNAMIC   TRUE  /* for xterm escape sequences         */
 #define    WORD_CHARS             "-A-Za-z0-9_$.+!*(),;:@&=?/~#%"
 
-#define    MENU                   TRUE
+#define    MENU                   FALSE
 // #define MENU_ENCODING_LIST     "BIG-5", "Default Encoding", "GBK", "EUC-JP"
 // #define MENU_MATCH_STRING_EXEC "firefox"
-// #define      MATCH_STRING_L    "firefox" /* left click to open without menu*/
-// #define      MATCH_STRING_M    "firefox" /* middle click to open           */
-// #define      MATCH_STRING_HTTP TRUE      /* Detect http(s) and ftp(s)      */
+// #define      MATCH_STRING_L    "sensible-browser" /* left click to open without menu*/
+#define         MATCH_STRING_M    "sensible-browser" /* middle click to open           */
+#define         MATCH_STRING_HTTP TRUE      /* Detect http(s) and ftp(s)      */
 // #define      MATCH_STRING_MAIL TRUE      /* Detect mailto:                 */
 // #define      MATCH_STRING_FILE TRUE      /* Detect file:///                */
 // #define MENU_CUSTOM            "Copy", "Separator", "Paste", "Separator"
@@ -101,16 +102,16 @@
 // #define TAB_CLOSE_BUTTON       TRUE
 // #define TAB_EXPANDED_WIDTH     TRUE
 // #define TAB_LABEL              "Page %u" /* %u will be replaced by numbers */
-// #define TAB_LABEL_DYNAMIC      TRUE      /* for xterm escape sequences     */
+#define TAB_LABEL_DYNAMIC      TRUE      /* for xterm escape sequences     */
 // #define TAB_LABEL_CUSTOM       "One", "Two", "Three", "Four", "Five", "Six"
 // #define TAB_NEW_PATH_EQUAL_OLD TRUE
 // #define TAB_NEW_TAB_AT_TAB_ONE TRUE   /* New tab will always the first tab */
 // #define TAB_REORDERABLE        TRUE
 // #define TAB_SHOW_INFO_AT_TITLE TRUE
-// #define TABBAR                 TRUE
-// #define TABBAR_PLACE           TOP    /* Options: TOP, BOTTOM, LEFT, RIGHT */
-// #define TABBAR_AUTOHIDE        TRUE
-// #define TABBAR_SCROLLABLE      TRUE
+#define TABBAR                 TRUE
+#define TABBAR_PLACE           TOP    /* Options: TOP, BOTTOM, LEFT, RIGHT */
+#define TABBAR_AUTOHIDE        TRUE
+#define TABBAR_SCROLLABLE      TRUE
 // #define TABBAR_MENU_SELECT_TAB TRUE
 
 /* Use || for multiple hotkeys.
@@ -158,7 +159,7 @@
 #define    HOTKEY_TAB_NEXT              CTRL(GDK_Page_Down)
 // #define HOTKEY_TAB_FIRST             CTRL(GDK_Home)
 // #define HOTKEY_TAB_LAST              CTRL(GDK_End)
-// #define ALT_NUMBER_GO_TO_TAB_NUMBER  TRUE
+#define ALT_NUMBER_GO_TO_TAB_NUMBER  TRUE
 // #define CTRL_NUMBER_GO_TO_TAB_NUMBER TRUE
 // #define HOTKEY_TAB_EDIT_LABEL        CTRL_SHIFT(GDK_E) || CTRL_SHIFT(GDK_e)
 // #define HOTKEY_TOGGLE_ANTI_ALIAS     CTRL_SHIFT(GDK_L) || CTRL_SHIFT(GDK_l)
