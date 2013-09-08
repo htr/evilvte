@@ -1,6 +1,6 @@
 /* Use // to disable options                                                  */
 
-#define    BACKGROUND_IMAGE       ".config/evilvte/background.png"
+// #define    BACKGROUND_IMAGE       ".config/evilvte/background.png"
 // #define BACKGROUND_SATURATION  0.4
 // #define BACKGROUND_SCROLLABLE  TRUE
 // #define BACKGROUND_TINT_COLOR  "black"
@@ -12,31 +12,32 @@
                          /*          DELETE_SEQUENCE                          */
 // #define BELL_AUDIBLE           TRUE
 // #define BELL_VISIBLE           TRUE
-// #define BELL_URGENT            TRUE
+#define BELL_URGENT            TRUE
 // #define BUTTON_ORDER_BY_RCFILE TRUE
 // #define CLOSE_DIALOG           TRUE  /* Dialog to confirm close event      */
 // #define CLOSE_SAFELY           TRUE  /* Do not kill running applications   */
-// #define COLOR_BACKGROUND       "white"
-// #define COLOR_FOREGROUND       "#000000"
+#define COLOR_BACKGROUND       "#000000"
+#define COLOR_FOREGROUND       "#dcdccc"
 // #define COLOR_STYLE   /* Options: LINUX, RXVT, TANGO, XTERM, ZENBURN,      */
                          /*          ZENBURN_DARK, SOLARIZED_DARK,            */
                          /*          SOLARIZED_LIGHT, HOLO, USER_CUSTOM       */
-// #define USER_COLOR_00 0x1b1d1e /* black dark    */
-// #define USER_COLOR_08 0x505354 /* black light   */
-// #define USER_COLOR_01 0xf92672 /* red dark      */
-// #define USER_COLOR_09 0xff5995 /* red light     */
-// #define USER_COLOR_02 0x82b414 /* green dark    */
-// #define USER_COLOR_10 0xb6e354 /* green light   */
-// #define USER_COLOR_03 0xfd971f /* yellow dark   */
-// #define USER_COLOR_11 0xfeed6c /* yellow light  */
-// #define USER_COLOR_04 0x56c2d6 /* blue dark     */
-// #define USER_COLOR_12 0x8cedff /* blue light    */
-// #define USER_COLOR_05 0x8c54fe /* magenta dark  */
-// #define USER_COLOR_13 0x9e6ffe /* magenta light */
-// #define USER_COLOR_06 0x465457 /* cyan dark     */
-// #define USER_COLOR_14 0x899ca1 /* cyan light    */
-// #define USER_COLOR_07 0xccccc6 /* white dark    */
-// #define USER_COLOR_15 0xf8f8f2 /* white light   */
+#define COLOR_STYLE USER_CUSTOM
+#define USER_COLOR_00 0x0e0e0e /* black dark    */
+#define USER_COLOR_08 0x505050 /* black light   */
+#define USER_COLOR_01 0xb04020 /* red dark      */
+#define USER_COLOR_09 0xdd4010 /* red light     */
+#define USER_COLOR_02 0xafd700 /* green dark    */
+#define USER_COLOR_10 0xdaff30 /* green light   */
+#define USER_COLOR_03 0xf7cf0a /* yellow dark   */
+#define USER_COLOR_11 0xfce70d /* yellow light  */
+#define USER_COLOR_04 0x3060aa /* blue dark     */
+#define USER_COLOR_12 0x6099dd /* blue light    */
+#define USER_COLOR_05 0xd6156c /* magenta dark  */
+#define USER_COLOR_13 0xfe4365 /* magenta light */
+#define USER_COLOR_06 0xa0c2de /* cyan dark     */
+#define USER_COLOR_14 0xc9dee8 /* cyan light    */
+#define USER_COLOR_07 0x808080 /* white dark    */
+#define USER_COLOR_15 0xb0b0b0 /* white light   */
 
 // #define COLOR_TEXT_BOLD        "red"
 // #define COLOR_TEXT_DIM         "#FFFF00"
@@ -49,9 +50,9 @@
 #define    COMMAND_EXEC_PROGRAM   TRUE  /* -e option, execute program         */
 // #define COMMAND_FULLSCREEN     TRUE  /* -f option, init in fullscreen mode */
 #define COMMAND_FONT              TRUE  /* -fn option, to assign font & size  */
-// #define COMMAND_GEOMETRY       TRUE  /* -g +X+Y option, to assign geometry */
+#define COMMAND_GEOMETRY       TRUE  /* -g +X+Y option, to assign geometry */
 // #define COMMAND_LOGIN_SHELL    TRUE  /* -ls option, to enable login shell  */
-// #define COMMAND_SET_TITLE      TRUE  /* -T or -title to set program title  */
+#define COMMAND_SET_TITLE      TRUE  /* -T or -title to set program title  */
 // #define COMMAND_SHOW_HELP      TRUE  /* -h option, show help               */
 #define    COMMAND_SHOW_OPTIONS   TRUE  /* -o option, show build-time options */
 #define    COMMAND_SHOW_VERSION   TRUE  /* -v option, show program version    */
@@ -60,17 +61,17 @@
 // #define CURSOR_COLOR           "blue"
 // #define CURSOR_SHAPE  /* Options: BLOCK, IBEAM, UNDERLINE                  */
 // #define DEFAULT_COMMAND        g_getenv("SHELL")
-// #define DEFAULT_DIRECTORY      g_get_current_dir()
+#define DEFAULT_DIRECTORY      g_get_current_dir()
 // #define DEFAULT_TERMINAL_SIZE  80x24
 // #define EXPORT_WINDOWID        TRUE
-#define FONT                   "Envy Code R 11"
-#define FONT_ANTI_ALIAS        TRUE
+#define FONT                   "Terminus 12"
+// #define FONT_ANTI_ALIAS        TRUE
 // #define FONT_ENABLE_BOLD_TEXT  TRUE
 // #define MOUSE_CTRL_SATURATION  TRUE  /* Scroll left or right to adjust it  */
 // #define MOUSE_CURSOR_AUTOHIDE  TRUE
 // #define PROGRAM_ALWAYS_ON_TOP  TRUE
 // #define PROGRAM_ICON           ".config/evilvte/icon.png"
-// #define PROGRAM_WM_CLASS       TRUE
+#define PROGRAM_WM_CLASS       TRUE
 // #define RECORD_LASTLOG         TRUE
 // #define RECORD_UTMP            TRUE
 // #define RECORD_WTMP            TRUE

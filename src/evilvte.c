@@ -3427,9 +3427,9 @@ int main(int argc, char **argv)
   j = 1;
   while ((j < argc) && strncmp(argv[j], "-e", 3)) {
 #if PROGRAM_WM_CLASS
-    if (argc > (j + 1) && !strncmp(argv[j], "--name", 7))
+    if (argc > (j + 1) && (!strncmp(argv[j], "--name", 7) || !strncmp(argv[j], "-name", 7)))
       wm_class_name = argv[j + 1];
-    if (argc > (j + 1) && !strncmp(argv[j], "--class", 8))
+    if (argc > (j + 1) && (!strncmp(argv[j], "--class", 8) || !strncmp(argv[j], "-class", 8)))
       wm_class_class = argv[j + 1];
 #endif
 
