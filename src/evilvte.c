@@ -1,6 +1,6 @@
 /* Forked from sakura 2.0.1, http://www.pleyades.net/david/sakura.php
  * Copyright (C) 2006-2008  David Gómez <david@pleyades.net>
- * Copyright (C) 2008-2012  Wen-Yen Chuang <caleb AT calno DOT com>
+ * Copyright (C) 2008-2013  Wen-Yen Chuang <caleb AT calno DOT com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -53,15 +53,17 @@
 #define IBEAM     VTE_CURSOR_SHAPE_IBEAM
 #define UNDERLINE VTE_CURSOR_SHAPE_UNDERLINE
 
-#define LINUX           1
-#define RXVT            2
-#define TANGO           3
-#define VTE_FIXED       4
-#define XTERM           5
-#define ZENBURN_DARK    6
-#define ZENBURN         7
-#define SOLARIZED_DARK  8
-#define SOLARIZED_LIGHT 9
+#define LINUX            1
+#define RXVT             2
+#define TANGO            3
+#define VTE_FIXED        4
+#define XTERM            5
+#define ZENBURN_DARK     6
+#define ZENBURN          7
+#define SOLARIZED_DARK   8
+#define SOLARIZED_LIGHT  9
+#define USER_CUSTOM     10
+#define HOLO            11
 
 #define LEFT   0
 #define RIGHT  1
@@ -91,6 +93,8 @@
 #endif
 typedef struct _GdkColormap GdkColormap;
 typedef struct _GdkDrawable GdkDrawable;
+typedef struct _GtkColorSelection GtkColorSelection;
+typedef struct _GtkColorSelectionDialog GtkColorSelectionDialog;
 typedef struct _GtkCssProvider GtkCssProvider;
 typedef struct _GtkFontSelectionDialog GtkFontSelectionDialog;
 typedef struct _GtkScrollable GtkScrollable;
@@ -345,6 +349,10 @@ typedef struct _GtkStyleProvider GtkStyleProvider;
 #define GTK_FONT_SELECTION_DIALOG
 #endif
 
+#ifndef GTK_COLOR_SELECTION_DIALOG
+#define GTK_COLOR_SELECTION_DIALOG
+#endif
+
 #if !defined(RULE_THEM_ALL) && GTK_CHECK_VERSION(2,91,0)
 #define gtk_widget_set_colormap gtk_widget_set_visual
 #define gdk_screen_get_rgba_colormap gdk_screen_get_rgba_visual
@@ -408,7 +416,7 @@ typedef struct _GtkStyleProvider GtkStyleProvider;
 #if !defined(RULE_THEM_ALL) && GTK_CHECK_VERSION(3,3,16)
 #undef GTK_COLOR_SELECTION
 #define GTK_COLOR_SELECTION GTK_COLOR_CHOOSER
-#define gtk_color_selection_dialog_get_color_selection GTK_COLOR_CHOOSER
+#define gtk_color_selection_dialog_get_color_selection(x) (x)
 #define gtk_color_selection_dialog_new(x) gtk_color_chooser_dialog_new(x,GTK_WINDOW(main_window))
 #define gtk_color_selection_get_current_rgba gtk_color_chooser_get_rgba
 #define gtk_color_selection_set_current_rgba gtk_color_chooser_set_rgba
@@ -1295,6 +1303,47 @@ const GdkColor color_style[16] = {
   { 0, 0x5858, 0x6e6e, 0x7575 },
   { 0, 0x0000, 0x2b2b, 0x3636 }
 #endif
+#if COLOR_STYLE == USER_CUSTOM
+  #define CLR_R(x)   (((x) & 0xff0000) >> 16)
+  #define CLR_G(x)   (((x) & 0x00ff00) >>  8)
+  #define CLR_B(x)   (((x) & 0x0000ff) >>  0)
+  #define CLR_16(x)  (((x) << 8) | (x))
+  #define CLR_GDK(x) { 0, CLR_16(CLR_R(x)), CLR_16(CLR_G(x)), CLR_16(CLR_B(x)) }
+  CLR_GDK(USER_COLOR_00),
+  CLR_GDK(USER_COLOR_01),
+  CLR_GDK(USER_COLOR_02),
+  CLR_GDK(USER_COLOR_03),
+  CLR_GDK(USER_COLOR_04),
+  CLR_GDK(USER_COLOR_05),
+  CLR_GDK(USER_COLOR_06),
+  CLR_GDK(USER_COLOR_07),
+  CLR_GDK(USER_COLOR_08),
+  CLR_GDK(USER_COLOR_09),
+  CLR_GDK(USER_COLOR_10),
+  CLR_GDK(USER_COLOR_11),
+  CLR_GDK(USER_COLOR_12),
+  CLR_GDK(USER_COLOR_13),
+  CLR_GDK(USER_COLOR_14),
+  CLR_GDK(USER_COLOR_15)
+#endif
+#if COLOR_STYLE == HOLO
+  { 0, 0x0000, 0x0000, 0x0000 },
+  { 0, 0xcccc, 0x0000, 0x0000 },
+  { 0, 0x6666, 0x9999, 0x0000 },
+  { 0, 0xffff, 0x8888, 0x0000 },
+  { 0, 0x0000, 0x9999, 0xcccc },
+  { 0, 0x9999, 0x3333, 0xcccc },
+  { 0, 0x0000, 0x9999, 0xcccc },
+  { 0, 0xa8a8, 0xa8a8, 0xa8a8 },
+  { 0, 0x5757, 0x5757, 0x5757 },
+  { 0, 0xffff, 0x4444, 0x4444 },
+  { 0, 0x9999, 0xcccc, 0x0000 },
+  { 0, 0xffff, 0xbbbb, 0x3333 },
+  { 0, 0x3333, 0xb5b5, 0xe5e5 },
+  { 0, 0xaaaa, 0x6666, 0xcccc },
+  { 0, 0x3333, 0xb5b5, 0xe5e5 },
+  { 0, 0xffff, 0xffff, 0xffff }
+#endif
 };
 #endif
 
@@ -1312,9 +1361,9 @@ const GdkColor color_style[16] = {
 #ifdef FONT
 char font_name[125];
 char font_str[128];
-unsigned int font_size;
+double font_size;
 #if defined(HOTKEY_FONT_DEFAULT_SIZE) || defined(MENU_FONT_DEFAULT_SIZE)
-unsigned int font_size_default;
+double font_size_default;
 #endif
 #endif
 
@@ -2124,18 +2173,23 @@ static void add_tab(void)
 #endif
 #endif
 
+#if COMMAND_COLOR_BG
+  if (command_color_bg) {
+#endif
 #if defined(COLOR_BACKGROUND) || COMMAND_COLOR_BG
-  GdkColor color_bg;
+    GdkColor color_bg;
 #endif
 #ifdef COLOR_BACKGROUND
-  gdk_color_parse(COLOR_BACKGROUND, &color_bg);
+    gdk_color_parse(COLOR_BACKGROUND, &color_bg);
 #endif
 #if COMMAND_COLOR_BG
-  gdk_color_parse(command_color_bg, &color_bg);
-  if (command_color_bg)
+    gdk_color_parse(command_color_bg, &color_bg);
 #endif
 #if defined(COLOR_BACKGROUND) || COMMAND_COLOR_BG
     vte_terminal_set_color_background(VTE_TERMINAL(term->vte), &color_bg);
+#endif
+#if COMMAND_COLOR_BG
+  }
 #endif
 
 #ifdef COLOR_TEXT_BOLD
@@ -2156,18 +2210,23 @@ static void add_tab(void)
   vte_terminal_set_color_dim(VTE_TERMINAL(term->vte), &color_dim);
 #endif
 
+#if COMMAND_COLOR_FG
+  if (command_color_fg) {
+#endif
 #if defined(COLOR_FOREGROUND) || COMMAND_COLOR_FG
-  GdkColor color_fg;
+    GdkColor color_fg;
 #endif
 #ifdef COLOR_FOREGROUND
-  gdk_color_parse(COLOR_FOREGROUND, &color_fg);
+    gdk_color_parse(COLOR_FOREGROUND, &color_fg);
 #endif
 #if COMMAND_COLOR_FG
-  gdk_color_parse(command_color_fg, &color_fg);
-  if (command_color_fg)
+    gdk_color_parse(command_color_fg, &color_fg);
 #endif
 #if defined(COLOR_FOREGROUND) || COMMAND_COLOR_FG
     vte_terminal_set_color_foreground(VTE_TERMINAL(term->vte), &color_fg);
+#endif
+#if COMMAND_COLOR_FG
+  }
 #endif
 
 #ifdef COLOR_TEXT_HIGHLIGHTED
@@ -2509,10 +2568,10 @@ static void calculate_font(void)
       g_snprintf(font_name, sizeof(font_name), FONT);
       len = strlen(font_name) - 1;
     }
-    font_size = atoi(strrchr(font_name, ' '));
+    font_size = atof(strrchr(font_name, ' '));
     if (font_size < 1)
       font_size = 1;
-    while (len > 0 && isdigit(font_name[len]))
+    while (len > 0 && (isdigit(font_name[len]) || font_name[len] == '.' ))
       font_name[len--] = 0;
     while (len > 0 && font_name[len] == ' ')
       font_name[len--] = 0;
@@ -2522,7 +2581,7 @@ static void calculate_font(void)
 #if defined(HOTKEY_FONT_DEFAULT_SIZE) || defined(MENU_FONT_DEFAULT_SIZE) || defined(HOTKEY_FONT_BIGGER) || defined(MENU_FONT_BIGGER) || defined(HOTKEY_FONT_SMALLER) || defined(MENU_FONT_SMALLER) || defined(HOTKEY_FONT_SELECT) || defined(MENU_FONT_SELECT)
 static void do_zoom_routine(void)
 {
-  g_snprintf(font_str, sizeof(font_str), "%s %d", font_name, font_size);
+  g_snprintf(font_str, sizeof(font_str), "%s %.1f", font_name, font_size);
   int i = 0;
   for (i = 0 ; i < gtk_notebook_get_n_pages(GTK_NOTEBOOK(notebook)) ; i++) {
     GET_CURRENT_TAB(i);
@@ -3309,7 +3368,7 @@ static void window_state_event(GtkWidget *widget, GdkEventWindowState *event)
 int main(int argc, char **argv)
 {
 #if COMMAND_DOCK_MODE
-bool at_dock_mode = FALSE;
+  bool at_dock_mode = FALSE;
 #endif
 
 #if COMMAND_EXEC_PROGRAM || COMMAND_TAB_NUMBERS || defined(MENU_ENCODING_LIST)
@@ -3320,6 +3379,14 @@ bool at_dock_mode = FALSE;
 #endif
 
 #if COMMAND_EXEC_PROGRAM
+  /* It seems gtk_init modifies content of argv when it detects
+   * --name/--class arguments and default_argv looses "-e" option parameters.
+   */
+  int gtk_argc = argc;
+  char **gtk_argv = (char**)malloc(argc * sizeof(char*));
+  int ii = 0;
+  for (ii = 0; ii < argc; ii++)
+    gtk_argv[ii] = argv[ii];
 #if !VTE_FORK_CMD_OLD
   bool change_command = 0;
 #endif
@@ -3389,6 +3456,10 @@ bool at_dock_mode = FALSE;
 #if COMMAND_SATURATION
     if (argc > (j + 1) && !strncmp(argv[j], "-sa", 4))
       saturation_level = strtod(argv[j + 1], NULL);
+    if (saturation_level > 1)
+      saturation_level = 1;
+    if (saturation_level < 0)
+      saturation_level = 0;
 #endif
 
 #if COMMAND_GEOMETRY
@@ -3536,7 +3607,7 @@ bool at_dock_mode = FALSE;
 #endif
     g_snprintf(font_name, sizeof(font_name), "%s", FONT);
   calculate_font();
-  g_snprintf(font_str, sizeof(font_str), "%s %d", font_name, font_size);
+  g_snprintf(font_str, sizeof(font_str), "%s %.1f", font_name, font_size);
 #if defined(HOTKEY_FONT_DEFAULT_SIZE) || defined(MENU_FONT_DEFAULT_SIZE)
   font_size_default = font_size;
 #endif
@@ -3778,7 +3849,13 @@ bool at_dock_mode = FALSE;
 #endif
 #endif
 
+#if !COMMAND_EXEC_PROGRAM
   gtk_init(&argc, &argv);
+#endif
+#if COMMAND_EXEC_PROGRAM
+  gtk_init(&gtk_argc, &gtk_argv);
+  free(gtk_argv);
+#endif
 
 #if TAB_CLOSE_BUTTON
 #ifdef RULE_THEM_ALL
