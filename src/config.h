@@ -83,7 +83,7 @@
 // #define SHOW_WINDOW_DECORATED  TRUE
 #define    SHOW_WINDOW_ICON       FALSE
 #define    STATUS_BAR             FALSE
-// #define WINDOW_TITLE_DYNAMIC   TRUE  /* for xterm escape sequences         */
+#define    WINDOW_TITLE_DYNAMIC   TRUE  /* for xterm escape sequences         */
 #define    WORD_CHARS             "-A-Za-z0-9_$.+!*(),;:@&=?/~#%"
 
 #define    MENU                   FALSE
